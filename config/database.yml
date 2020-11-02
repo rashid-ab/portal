@@ -1,0 +1,22 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  password: postgres
+  host: localhost
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  # database: client-portal_development
+  database: awesome-portal-database
+
+test:
+  <<: *default
+  database: awesome-portal-test
+
+production:
+  <<: *default
+  database: awesome-portal-production
+  

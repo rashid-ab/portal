@@ -1,0 +1,106 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=192365890814084";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="content wide content-row">
+
+  <div class="content-main">
+    <%= render 'shared/flash' %>
+
+    <% if @show_welcome_section %>
+      <div class="dashboard-widget">
+        <div class="dashboard-widget-title">Welcome <%= link_to "Dismiss", dismiss_welcome_path, method: :put, class: "dashboard-widget-dismiss" %></div>
+        <p class="dashboard-widget-text"><%= @welcome_text %></p>
+      </div>
+    <% end %>
+
+    <% if @services.present? %>
+      <table class="dashboard-table clickableRows">
+        <tbody>
+          <tr>
+            <th>Service Name</th>
+            <th>Homework Status</th>
+            <th>Status</th>
+            <th>Latest Report</th>
+          </tr>
+          <% ServiceDecorator.decorate_collection(@services).each do |service| %>
+            <tr data-href="<%= service_path(service) %>">
+              <td><%= link_to service.name, service_path(service) %></td>
+              <td><%= service.todos_summary %></td>
+              <td><%= service.status %></td>
+              <td><%= service.latest_report_date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <% if @projects.present? %>
+      <table class="dashboard-table clickableRows">
+        <tbody>
+          <tr>
+            <th>Project Name</th>
+            <th>Homework Status</th>
+            <th>Project Status</th>
+            <th>Completion Date</th>
+          </tr>
+          <% ProjectDecorator.decorate_collection(@projects).each do |project| %>
+            <tr data-href="<%= project_path(project) %>">
+              <td><%= link_to project.name, project_path(project) %></td>
+              <td><%= project.todos_summary %></td>
+              <td>
+                <% if project.project_status.present? %>
+                  <%= project.project_status.name %>
+                <% end %>
+                <%= project.percent_complete_bar %>  
+              </td>
+              <td><%= project.target_completion_date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <% if current_contact.marketing_manager.present? %>
+      <%= render 'manager', manager: current_contact.marketing_manager %>
+    <% end %>
+
+  </div>
+  
+  <div class="content-sidebar dashboard-widgets">
+    <div class="dashboard-widget">
+      <% @ads.each do |ad| %>
+        <%= ad.name %><br>
+      <% end %>
+    </div>
+    <div class="dashboard-widget dashboard-widget-facebook">
+      <div class="dashboard-widget-title">Facebook Feed</div>
+
+      <div class="fb-page" data-href="https://www.facebook.com/rockpapersimple" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
+        <blockquote cite="https://www.facebook.com/rockpapersimple" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/rockpapersimple">Rock Paper Simple</a>
+        </blockquote>
+      </div>
+
+    </div>
+    <div class="dashboard-widget">
+      <div class="dashboard-widget-title">Latest From Our Blog</div>
+      <div class="dashboard-widget-blog-links">
+        <%= render partial: 'blog_articles', collection: @blog_articles, as: :article %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+  <script>
+    $(function(){
+      $('.dashboard-table').stacktable();
+    });
+  </script>
+<% end %>

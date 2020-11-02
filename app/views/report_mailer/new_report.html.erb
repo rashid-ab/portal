@@ -1,0 +1,24 @@
+<p>
+  <strong>
+    <%= link_to @report.title, report_url(@report) %>
+  </strong>
+</p>
+
+<p>
+  Service: <%= link_to @report.service.name, service_url(@report.service) %>
+</p>
+
+<%= simple_format @report.description %>
+
+
+<% if @report.attachments.present? %>
+  <p>
+    Attachments
+  </p>
+
+  <ul>
+    <% @report.attachments.each do |attachment| %>
+      <li><%= link_to attachment.name, attachment.url %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,0 +1,14 @@
+{
+  "name": "portal_of_awesome",
+  "version": "1.0.0",
+  "description": "You need to switch to an Organization before you can do much. ``` Apartment::Tenant.switch('rock_paper_simple') ```",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

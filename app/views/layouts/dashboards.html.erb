@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ClientPortal</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/organization_color_overrides' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <div class="footer-pusher">
+
+      <div class="header">
+        <div class="header-content">
+          <% if current_organization.present? %>
+          <%= current_organization.decorate.logo 'header-logo' %>
+	        <% end %>
+          <ul class="header-navigation">
+            <li><%= link_to "Dashboard", dashboard_path %></li>
+            <li><%= link_to "Profile", profile_path %></li>
+            <li><%= link_to "Resources", resources_path %></li>
+            <li><%= link_to 'Logout', destroy_contact_session_path, method: :delete %></li>
+          </ul>
+          <div class="header-phone">
+            (321) 626-2172
+          </div>
+          <%= link_to("/help", class:"header-help-icon") do %>
+            <i class="fa fa-question-circle"></i>
+          <% end %>
+        </div>
+      </div>
+
+      <%= yield %>
+    </div>
+
+    <div class="footer">
+      <div class="footer-content">
+        <div>Copyright Rock Paper Simple <%= Time.now.year %> | All Rights Reserved</div>
+        <% if current_organization.present? %>
+          <%= current_organization.decorate.logo 'header-logo' %>
+	      <% end %>
+      </div>
+    </div>
+  </body>
+
+  <%= yield :scripts %>
+</html>

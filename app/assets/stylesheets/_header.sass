@@ -1,0 +1,68 @@
+.header
+  background: $primary_color
+  color: #FFF
+  text-align: center
+  padding: 6px
+  letter-spacing: 0.04em
+  font-weight: 300
+
+img.header-logo
+  max-height: 48px
+span.header-logo
+  display: inline-block
+  border-bottom: 1px solid rgba(255,255,255,.25)
+  padding: 10px 20px
+  margin-bottom: 10px
+
+.header-navigation
+  margin: 0
+  padding: 0
+  li
+    list-style: none
+  a
+    color: #FFF
+    text-decoration: none
+    display: inline-block
+    padding: 0.4em
+    text-transform: uppercase
+    font-size: 14px
+
+.header-phone
+  padding: 0.4em
+  font-size: 18px
+
+.header-help-icon
+  color: #FFF
+  font-size: 18px
+
+@media (min-width: $tablet)
+  .header
+    padding-left: 0
+    padding-right: 0
+
+  .header-content
+    display: flex
+    height: 60px
+    text-align: left
+    align-items: center
+    width: 96%
+    max-width: 1400px
+    margin: 0 auto
+
+  span.header-logo
+    border-bottom: none
+    margin-bottom: 0
+    margin-right: 10px
+    border-right: 1px solid rgba(255,255,255,.25)
+    padding: 10px 20px 10px 0
+
+  .header-navigation
+    display: inline-block
+    li
+      display: inline-block
+      a
+        padding: 0.4em 1em
+
+  .header-phone
+    margin-left: auto
+    font-size: 24px

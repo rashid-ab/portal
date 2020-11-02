@@ -1,0 +1,17 @@
+if subject.todos.present?
+  table_for subject.todos, sortable: true do
+    column(:name) { |todo| link_to(todo.name, polymorphic_path([:admin, subject, todo])) }
+    column :status
+    column :due_date
+  end
+  div do
+    link_to('Add a new todo', polymorphic_path([:new, :admin, subject, :todo]))
+  end
+else
+  div class: "blank_slate_container" do
+    span class: "blank_slate" do
+      span "This #{subject.class.name.downcase} doesn't have any todos yet.<br> 
+        #{link_to('Click here', polymorphic_path([:new, :admin, subject, :todo]))} to add one.".html_safe
+    end
+  end
+end

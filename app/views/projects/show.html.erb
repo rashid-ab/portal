@@ -1,0 +1,41 @@
+<div class="content">
+  <%= render 'shared/flash' %>
+
+  <h1 class="page-title"><%= @project.name %></h1>
+
+  <div class="content-row">
+    <div class="content-sidebar">
+      <div class="section">
+        <table class="attributes-table fixed-first-column">
+          <tr>
+            <td class="min-fixed-column">Project Type</td>
+            <td><%= @project.project_type.name %></td>
+          </tr>
+          <tr>
+            <td class="min-fixed-column">Project Status</td>
+            <td><%= @project.project_status.name %></td>
+          </tr>
+          <% if @project.completion_date_visible %>
+            <tr>
+              <td class="min-fixed-column">Target Completion Date</td>
+              <td><%= @project.target_completion_date %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td>Percent Complete</td>
+            <td><%= @project.percent_complete %>%</td>
+          </tr>
+          <tr>
+            <td>Notes</td>
+            <td><%= @project.notes %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="content-main">
+      <%= render 'shared/homework_table', todos: @project.todos %>
+    </div>
+  </div>
+
+
+</div>

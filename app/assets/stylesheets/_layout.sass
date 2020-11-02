@@ -1,0 +1,61 @@
+*
+  box-sizing: border-box
+
+html, body
+  height: 100%
+  margin: 0
+  padding: 0
+
+img
+  max-width: 100%
+
+.content
+  width: 96%
+  max-width: $desktop
+  margin: 2% auto 0
+  padding-bottom: 90px
+  &.wide
+    max-width: 1400px
+    .content-main
+
+  &.narrow
+    max-width: $tablet
+
+.footer-pusher
+  min-height: 100%
+
+.footer
+  background: $primary_color
+  color: #FFF
+  font-size: 12px
+  padding: 10px
+  height: 50px
+  margin-top: -50px
+
+
+// sections
+
+
+.section
+  margin-bottom: 40px
+
+.section-header
+  font-size: 24px
+  display: inline-block
+  margin-bottom: 10px
+
+
+@media (min-width: $desktop)
+  .content-row
+    display: flex
+  
+  .content-main
+    flex: 1
+  
+  .content-sidebar
+    flex: 0 0 340px
+
+  // Add padding to the left side of whichever column is on the right
+  .content-main+.content-sidebar,
+  .content-sidebar+.content-main
+    margin-left: 30px

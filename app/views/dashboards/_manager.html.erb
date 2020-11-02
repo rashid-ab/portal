@@ -1,0 +1,21 @@
+<div class="dashboard-manager">
+
+  <div class="dashboard-manager-label">
+    <% if manager.avatar_url.present? %>
+      <div class="dashboard-manager-photo-frame" style="background-image: url(<%= manager.avatar_url %>);"></div>
+    <% end %>
+    <div class="dashboard-manager-first-name"><%= manager.first_name %></div>
+  </div>
+
+  <div class="dashboard-manager-details">
+    <p class="dashboard-manager-title">
+      <%= manager.name %>, <%= manager.title %>
+    </p>
+    <p class="dashboard-manager-quote">
+      <strong>Favorite Quote:</strong> <%= manager.favorite_quote %>
+    </p>
+    <p><%= manager.bio %></p>
+    <p><%= manager_contact_text(manager) %></p>
+  </div>
+
+</div>

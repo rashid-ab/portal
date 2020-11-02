@@ -1,0 +1,10 @@
+<div class="content narrow">
+
+  <%= render 'shared/flash' %>
+
+  <div class="resource-container">
+  <h1 class="page-title"><%= @resource.title %></h1>
+    <%#= image_tag(@resource.thumbnail_url, alt: @resource.title, width: "300", height: "300") unless @resource.thumbnail_url.blank? %>
+    <p class="resource-container-content"><%= @resource.content.html_safe %></p>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<%= semantic_form_for [:admin, resource] do |f| %>
+
+  <%= f.semantic_errors *f.object.errors.keys %>
+
+  <%= f.inputs do %>
+
+    <%= f.input :company %>
+    <li>
+      <%= f.label :login_type %>
+      <%= f.select :login_type, options_for_select(Login.login_types.map { |key, value| [key, key]}, selected: f.object.login_type) %>
+    </li>
+    <%= f.input :port %>
+    <%= f.input :host %>
+    <%= f.input :title %>
+    <%= f.input :username %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :url %>
+    <%= f.input :notes %>
+  <% end %>
+
+  <%= f.actions %>
+<% end %>
+
+
+<script>
+  $(document).ready(function() {
+
+    if ($("#login_login_type").val() == "SFTP or FTP") {
+        $("#login_port_input").show()
+        $("#login_host_input").show()
+    }
+    else {
+        $("#login_port_input").hide()
+        $("#login_host_input").hide()
+    }
+
+    $("#login_login_type").change(function() {
+      if ($("#login_login_type").val() == "SFTP or FTP") {
+          $("#login_port_input").show()
+          $("#login_host_input").show()
+      }
+      else {
+         $("#login_port_input").hide()
+         $("#login_host_input").hide()
+      }
+    });
+    
+  });
+</script>

@@ -1,0 +1,53 @@
+<%= semantic_form_for [:admin, resource.subject, resource], upload_form_options(builder: ActiveAdmin::FormBuilder) do |f| %>
+
+  <%= f.semantic_errors *f.object.errors.keys %>
+  
+  <%= f.inputs do %>
+
+    <%= f.input :subject_type, as: :hidden %>
+    <%= f.input :subject_id, as: :hidden %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :due_date, as: :date_picker %>
+    <%= f.input :status %>
+
+    <li>
+      <%= f.label :attachments %>
+      <div class="multi-line-form-input">
+        <% if resource.attachments.present? %>
+          <ul>
+            <% resource.attachments.map do |a| %>
+              <li><%= a.name %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <%= f.file_field 'attachments_attributes[][url]', class: "file-upload-button" %>
+      </div>
+    </li>
+
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit %>
+    <%= f.cancel_link(polymorphic_path([:admin, resource.subject, resource])) %>
+  <% end %>
+
+<% end %>
+
+<script>
+
+  $(function() {
+    var authorId = '<%= current_user.id %>';
+    var authorType = '<%= current_user.class %>';
+
+    handleFileUploadInputs('.directUpload', {
+      successCallback: function() {
+        var author = '';
+        author += '<input type="hidden" name="todo[attachments_attributes[][author_id]]" value="' + authorId + '">';
+        author += '<input type="hidden" name="todo[attachments_attributes[][author_type]]" value="' + authorType + '">';
+        $('.directUpload').append(author);
+      }
+    });
+  });
+
+</script>

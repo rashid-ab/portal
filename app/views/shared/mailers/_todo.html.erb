@@ -1,0 +1,8 @@
+<li>
+  <%= todo.name %><br>
+  <% if todo.overdue? %>
+    Due: <span style="color: red; font-weight: bold;"><%= l todo.due_date, format: :words %> (overdue)</span>
+  <% elsif todo.due_date.present? %>
+    Due: <%= l todo.due_date, format: :words %>
+  <% end %>
+</li>

@@ -1,0 +1,35 @@
+<p>Hi <%= @contact.first_name %>!</p>
+
+<p>
+  This is your weekly reminder with the list of items we need.
+</p>
+
+<% @projects.each do |project| %>
+  <% if project.open_todos.present? %>
+    <%= render 'shared/mailers/todo_list', subject: project, todos: project.open_todos %>
+  <% end %>
+<% end %>
+
+<% @services.each do |service| %>
+  <% if service.open_todos.present? %>
+    <%= render 'shared/mailers/todo_list', subject: service, todos: service.open_todos %>
+  <% end %>
+<% end %>
+
+<p>
+  <% login_url = new_contact_session_url %>
+  You can login to your portal here: <%= link_to login_url, login_url %>.
+</p>
+
+<p>
+  We won't be able to begin work until we have all of these items.
+</p>
+
+<p>
+  Thanks!
+</p>
+
+<p>
+  <%= @contact.marketing_manager.name %><br>
+  <%= @organization.name %>
+</p>

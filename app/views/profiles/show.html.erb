@@ -1,0 +1,176 @@
+<div class="content narrow">
+
+  <%= render 'shared/flash' %>
+
+  <h1 class="page-title"><%= current_contact.name %></h1>
+
+  <p>
+    <%= link_to "Edit Profile Information", edit_profile_path %>
+  </p>
+  
+  <div>
+    <label class="notify">Email Notification</label>
+    <label class="switch">
+      <input type="checkbox" checked id="myCheck" onclick="myFunction()">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <table class="attributes-table fixed-first-column">
+    <tr>
+      <td>Email</td>
+      <td><%= current_contact.email %></td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td><%= current_contact.phone %></td>
+    </tr>
+    <tr>
+      <td class="min-fixed-column">Email Updates</td>
+      <td><%= current_contact.email_updates %></td>
+    </tr>
+    <tr>
+      <td class="min-fixed-column">Password</td>
+      <td>********</td>
+    </tr>
+  </table>
+
+  <h2><%= current_contact.company.name %></h2>
+
+  <table class="attributes-table fixed-first-column">
+    <tr>
+      <td>Email</td>
+      <td><%= current_contact.company.email %></td>
+    </tr>
+    <tr>
+      <td class="min-fixed-column">Phone</td>
+      <td><%= current_contact.company.phone %></td>
+    </tr>
+  </table>
+
+  <h2>Logins</h2>
+
+  <p>
+    <%= link_to "Add New Login", new_login_path %>
+  </p>
+
+  <table class="dashboard-table">
+    <tr>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>URL</th>
+      <th>Notes</th>
+      <th colspan="3">Actions</th>
+    </tr>
+    
+    <% @logins.each do |login| %>
+      <tr>
+        <td><%= login.login_type %></td>
+        <td><%= login.title %></td>
+        <td><%= login.username %></td>
+        <td><%= login.email %></td>
+        <td><%= login.url %></td>
+        <td><%= login.notes %></td>
+        <td><%= link_to 'View', login %></td>
+        <td><%= link_to 'Edit', edit_login_path(login) %></td>
+        <td><%= link_to 'Delete', login_path(login), data: {method: :delete, confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+    
+  </table>
+</div>
+
+<script>
+function myFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  var notification = true;
+  if (checkBox.checked == true){
+    notification = true;
+  } else {
+    notification = false;
+  }
+
+  $.ajax({
+    type: "post",
+    url: "/email_update/",
+    data: { id: <%=current_contact.id%>, notify: notification},
+    async: false,
+  });
+}
+</script>
+
+<style>
+.section_header{
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.notify{
+  position: absolute;
+  margin-left: 43.7%;
+  margin-top: -3.0%;
+}
+.switch {
+  position: absolute;
+  display: inline-block;
+  margin-left: 54.5%;
+  margin-top: -3.7%;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #ff8000;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #ff8000;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>

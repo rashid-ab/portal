@@ -1,0 +1,21 @@
+<div class="section-header">Homework</div>
+<% if todos.present? %>
+  <table class="dashboard-table clickableRows">
+    <tr>
+      <th>Name</th>
+      <th>Due Date</th>
+      <th>Status</th>
+    </tr>
+    <% TodoDecorator.decorate_collection(todos).each do |todo| %>
+      <tr data-href="<%= todo_path(todo) %>">
+        <td><%= link_to todo.name, todo_path(todo) %></td>
+        <td><%= todo.due_date %></td>
+        <td><%= todo.status %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <div class="empty-placeholder-message">
+    Nothing is needed at this time.
+  </div>
+<% end %>

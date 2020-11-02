@@ -1,0 +1,96 @@
+<div class="content narrow">
+
+  <%= render 'shared/flash' %>
+
+  <h1 class="page-title">Edit Your Profile</h1>
+
+  <%= form_for(@contact, url: profile_path, html: {class: 'profile-form'}) do |f| %>
+
+    <% if @contact.errors.any? %>
+      <ul>
+        <% @contact.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :phone %>
+      <%= f.text_field :phone %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      <div class="email-updates-section">
+        <%= f.check_box :email_updates %>
+        <%= f.label :email_updates, "Send me email updates about my projects and services." %>
+      </div>
+    </div>
+
+    <%= fields_for @contact.company do |company_form| %>
+      <div class="field">
+        <%= company_form.label :email, 'Company Email' %>
+        <%= company_form.text_field :email %>
+      </div>
+
+      <div class="field">
+        <%= company_form.label :phone, 'Company Phone' %>
+        <%= company_form.text_field :phone %>
+      </div>
+    <% end %>
+    
+    <a href="#" class="profile-change-password-link changePasswordLink">Change My Password</a>
+
+    <div class="profile-change-password changePasswordContainer">
+
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="field">
+        <%= f.label :password, "New password" %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirm new password" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+</div>
+
+<% content_for :scripts do %>
+  <script>
+    $(function() {
+      $('.changePasswordLink').click(function(e) {
+        e.preventDefault();
+
+        if ($('.changePasswordContainer').is(':visible')){
+          $('.changePasswordContainer').slideUp('fast');
+          $(this).text('Change My Password');
+          $('#contact_password').val('');
+          $('#contact_password_confirmation').val('');
+        } else {
+          $('.changePasswordContainer').slideDown('fast');
+          $(this).text('Cancel Password Change');
+        }
+
+      });
+    });
+  </script>
+<% end %>

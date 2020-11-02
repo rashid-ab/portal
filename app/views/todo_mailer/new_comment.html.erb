@@ -1,0 +1,30 @@
+<% content_for :styles do %>
+  .comment-table {
+    border-collapse: collapse;
+  }
+  .comment-table td {
+    border: 1px solid #DDD;
+    padding: 4px 10px;
+  }
+<% end %>
+
+<table class="comment-table td">
+  <tr>
+    <td><%= @todo.subject_type %></td>
+    <td><%= todo_subject_link(@user, @todo.subject) %></td>
+  </tr>
+  <tr>
+    <td>Homework</td>
+    <td><%= todo_link(@user, @todo) %></td>
+  </tr>
+  <tr>
+    <td>From</td>
+    <td><%= @comment.author.name %></td>
+  </tr>
+  <tr>
+    <td>Time</td>
+    <td><%= l @comment.updated_at, format: :words %></td>
+  </tr>
+</table>
+
+<%= simple_format(@comment.body) %>

@@ -1,0 +1,95 @@
+panel "Company Details" do
+  attributes_table_for(company) do
+    row :name
+    row :phone
+    row :email
+    row(:blocked_advertisements) do |company| 
+      company.blocked_advertisements.map(&:name).join(', ')
+    end
+    row :marketing_manager
+    row :development_manager
+  end
+end
+
+columns do
+
+  column do
+    panel "Projects" do
+      if company.projects.present?
+        table_for company.projects, sortable: true do
+          column(:name) { |project| link_to(project.name, admin_company_project_path(company, project))}
+        end
+        div do
+          link_to('Add a new project', new_admin_company_project_path(company))
+        end
+      else
+        div class: "blank_slate_container" do
+          span class: "blank_slate" do
+            span "This company doesn't have any projects yet.<br>
+              #{link_to('Click here', new_admin_company_project_path(company))} to add one.".html_safe
+          end
+        end
+      end
+    end
+  end
+
+  column do
+    panel "Services" do
+      if company.services.present?
+        table_for company.services, sortable: true do
+          column(:name) { |service| link_to(service.name, admin_company_service_path(company, service))}
+          column :status
+        end
+        div do
+          link_to('Add a new service', new_admin_company_service_path(company))
+        end
+      else
+        div class: "blank_slate_container" do
+          span class: "blank_slate" do
+            span "This company doesn't have any services yet.<br>
+              #{link_to('Click here', new_admin_company_service_path(company))} to add one.".html_safe
+          end
+        end
+      end
+    end
+  end
+
+  column do
+    panel "Contacts" do
+      if company.contacts.present?
+        table_for company.contacts, sortable: true do
+          column(:name) { |contact| link_to(contact.name, admin_contact_path(contact)) }
+        end
+        div do
+          link_to('Add a new contact', new_admin_contact_path(company_id: company.id))
+        end
+      else
+        div class: "blank_slate_container" do
+          span class: "blank_slate" do
+            span "This company doesn't have any contacts yet.<br>#{link_to('Click here', new_admin_contact_path)} to add one.".html_safe
+          end
+        end
+      end
+    end
+  end
+
+  column do
+    panel "Logins" do
+      if company.logins.present?
+        table_for company.logins, sortable: true do
+          column(:title) { |login| link_to(login.title, admin_login_path(login)) }
+        end
+        div do
+          link_to('Add a new login', new_admin_login_path(company_id: company.id))
+        end
+      else
+        div class: "blank_slate_container" do
+          span class: "blank_slate" do
+            span "This company doesn't have any logins yet.<br>#{link_to('Click here', new_admin_login_path(company_id: company.id))} to add one.".html_safe
+          end
+        end
+      end
+    end
+  end
+
+end

@@ -1,0 +1,40 @@
+<%= semantic_form_for [:admin, resource], upload_form_options(builder: ActiveAdmin::FormBuilder) do |f| %>
+
+  <%= f.semantic_errors *f.object.errors.keys %>
+
+  <%= f.inputs do %>
+
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :title %>
+      <%= f.input :email %>
+      <%= f.input :office_phone %>
+      <%= f.input :cell_phone %>
+      <%= f.input :favorite_quote %>
+      <%= f.input :bio %>
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
+
+      <li>
+        <%= f.label :avatar_url %>
+        <div class="multi-line-form-input">
+          <div>
+            <%= image_tag resource.avatar_url, width: 150 if resource.avatar_url.present? %>
+          </div>
+          <%= f.file_field :avatar_url, class: "file-upload-button" %>
+        </div>
+      </li>
+
+  <% end %>
+
+  <%= f.actions %>
+<% end %>
+
+
+<script>
+
+  $(function() {
+    handleFileUploadInputs('.directUpload');
+  });
+
+</script>

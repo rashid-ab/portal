@@ -1,0 +1,21 @@
+// Place all the styles related to the resources controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 2rem;
+}
+
+.resources-title {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.resource-container {
+  text-align: left;
+}
+
+.resource-container-content {
+  margin-top: 10px;
+}

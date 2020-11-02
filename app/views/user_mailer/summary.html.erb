@@ -1,0 +1,34 @@
+<p>Hi <%= @user.first_name %>!</p>
+
+<p>
+  Here's a summary of everything that is still needed for your projects:
+</p>
+
+<% @companies.each do |company| %>
+  <hr>
+
+  <strong style="font-size: 1.2em"><%= company.name %></strong><br>
+
+  <% company.projects.each do |project| %>
+    <% if project.open_todos.present? %>
+      <p>
+        <%= render 'shared/mailers/todo_list', subject: project, todos: project.open_todos %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <% company.services.each do |service| %>
+    <% if service.open_todos.present? %>
+      <p>
+        <%= render 'shared/mailers/todo_list', subject: service, todos: service.open_todos %>
+      </p>
+    <% end %>
+  <% end %>
+
+<% end %>
+
+<hr>
+<p>
+  Have a great day!<br>
+  - The Portal of Awesome Team
+</p>

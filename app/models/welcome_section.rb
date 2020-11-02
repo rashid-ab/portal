@@ -1,0 +1,2 @@
+class WelcomeSection < ApplicationRecord
+end

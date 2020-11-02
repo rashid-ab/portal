@@ -1,0 +1,30 @@
+<% if current_organization.present? %>
+		<% primary = current_organization.primary_color %>
+		<% secondary = current_organization.secondary_color %>
+<% end %>
+<style>
+
+  <% if primary.present? %>
+
+    .header,
+    .footer,
+    .dashboard-table th {
+      background: <%= primary %>;
+    }
+
+  <% end %>
+
+  <% if secondary.present? %>
+
+    .dashboard-manager-label,
+    .dashboard-widget-title {
+      background: <%= secondary %>;
+    }
+  
+    .dashboard-manager-details {
+      border-color: <%= secondary %>;
+    }
+
+  <% end %>
+
+</style>

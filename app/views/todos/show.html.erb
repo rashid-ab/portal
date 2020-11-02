@@ -1,0 +1,114 @@
+<div class="content">
+  <%= render 'shared/flash' %>
+  <h1 class="page-title"><%= @todo.name %></h1>
+
+  <div class="content-row">
+    <div class="content-sidebar">
+      <table class="attributes-table todo-summary-table">
+        <tr>
+          <td><%= @todo.subject_type %></td>
+          <td><%= link_to @todo.subject.name, polymorphic_path(@todo.subject) %></td>
+        </tr>
+        <tr>
+          <td>Status</td>
+          <td><%= @todo.decorate.status_and_change_date %></td>
+        </tr>
+        <tr>
+          <td class="min-fixed-column">Due Date</td>
+          <td><%= @todo.decorate.due_date %></td>
+        </tr>
+      </table>
+
+      <div class="section">
+        <% if @todo.open? %>
+          <%= form_for @todo do |f| %>
+            <%= f.hidden_field :status, value: :submitted %>
+            <%= f.submit "Submit for Review", class: 'btn btn-primary todo-submit-btn' %>
+            <p class="todo-submit-instructions">
+              When the requested homework has been provided, submit this item to your project manager for review.
+            </p>
+          <% end %>
+        <% elsif @todo.submitted? %>
+          <p>This has been submitted for review.</p>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="content-main">
+
+      <div class="section">
+        <div class="section-header">Description</div>
+
+        <div class="todo-section-content">
+          <%= simple_format @todo.description %>
+        </div>
+      </div>
+      
+
+      <div class="section">
+      
+        <div class="section-header todo-section-header">
+          <div class="todo-section-title">Attachments</div>
+          <%= link_to "Add Attachment", new_todo_attachment_path(@todo), class: 'btn todo-add-attachment-btn' %>
+        </div>
+
+        <div class="todo-section-content">
+          <% if @todo.attachments.present? %>
+            <table class="todo-attachments-table">
+              <% @todo.attachments.each do |attachment| %>
+                <tr>
+                  <td><%= link_to attachment.name, attachment.url %></td>
+                  <td><%= link_to 'Delete', todo_attachment_path(@todo, attachment), data: {method: :delete, confirm: 'Are you sure?'} %></td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+        </div>
+      </div>
+
+      
+      <div class="section">
+        <div class="section-header">Comments</div>
+
+        <div class="comments todo-section-content">
+          <% if @comments.present? %>
+            <% @comments.decorate.each do |comment| %>
+              <div class="comment">
+                <div class="comment-meta">
+                  <%= comment.author.name %> on <%= comment.updated_at %>
+                </div>
+                <div class="comment-body"><%= simple_format(comment.body) %></div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <%= link_to 'Add Comment', '#', id: 'showCommentFormLink', class: 'btn' %>
+
+        <%= form_for [@todo, @comment], url: todo_comments_path(@todo), html: {id: 'newCommentForm', 
+          class: 'comment-form', style: 'display: none;'} do |f| %>
+          <div class="field">
+            <%= f.text_area :body, placeholder: 'Add a new comment...' %>
+          </div>
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+
+<% content_for :scripts do %>
+  <script>
+    $(function() {
+
+      $('#showCommentFormLink').click(function(e) {
+        e.preventDefault();
+        $(this).hide();
+        $('#newCommentForm').show();
+      });
+
+    });
+  </script>
+<% end %>

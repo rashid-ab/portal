@@ -1,0 +1,32 @@
+<div class="content narrow">
+  <%= render 'shared/flash' %>
+
+  <h1>Add An Attachment</h1>
+  
+  <%= form_for [@todo, @attachment], upload_form_options do |f| %>
+    <%= f.hidden_field :attachable_type %>
+    <%= f.hidden_field :attachable_id %>
+    <%= f.hidden_field :author_type %>
+    <%= f.hidden_field :author_id %>
+
+    <div class="field text-field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="attachment-upload-container">
+      <%= f.file_field :url, class: "file-upload-button" %>
+    </div>
+
+    <%= f.submit "Add Attachment", class: 'submit-button' %>
+  <% end %>
+
+</div>
+
+<script>
+
+  $(function() {
+    handleFileUploadInputs('.directUpload');
+  });
+
+</script>

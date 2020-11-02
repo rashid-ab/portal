@@ -1,0 +1,41 @@
+<div class="content">
+  <%= render 'shared/flash' %>
+
+  <h1 class="page-title"><%= @service.name %></h1>
+  
+  <div class="content-row">
+
+    <div class="content-sidebar">
+      <div class="section">
+        <table class="attributes-table">
+          <tr>
+            <td>Status</td>
+            <td><%= @service.status %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="content-main">
+      <%= render 'shared/homework_table', todos: @service.todos %>
+
+      <div class="section-header">Reports</div>
+      <% if @service.reports.present? %>
+        <table class="attributes-table">
+          <% ReportDecorator.decorate_collection(@service.reports).each do |report| %>
+            <tr>
+              <td><%= report.date %></td>
+              <td><%= link_to report.title, report %></td>
+            </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <div class="empty-placeholder-message">
+          This service doesn't have any reports yet.
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

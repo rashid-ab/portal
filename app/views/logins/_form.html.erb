@@ -1,0 +1,88 @@
+<%= form_for(@login, html: {class: 'profile-form'}) do |f| %>
+  
+
+    <% if @login.errors.any? %>
+      <ul>
+        <% @login.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :login_type %>
+      <%= f.select :login_type, options_for_select(Login.login_types.map { |key, value| [key, key]}, selected: f.object.login_type) %>
+    </div>
+
+    <div id="port-field" class="field">
+      <%= f.label :port %>
+      <%= f.text_field :port %>
+    </div>
+
+    <div id="host-field" class="field">
+      <%= f.label "Host/Address" %>
+      <%= f.text_field :host %>
+    </div>
+
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.text_field :password %>
+    </div>
+
+    <div class="field">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+
+    <div class="field">
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+    </div>
+
+<% end %>
+
+<script>
+  
+  $(document).ready(function() {
+
+    if ($("#login_login_type").val() == "SFTP or FTP") {
+        $("#port-field").show()
+        $("#host-field").show()
+    }
+    else {
+        $("#port-field").hide()
+        $("#host-field").hide()
+    }
+
+    $("#login_login_type").change(function() {
+      if ($("#login_login_type").val() == "SFTP or FTP") {
+          $("#port-field").show()
+          $("#host-field").show()
+      }
+      else {
+          $("#port-field").hide()
+          $("#host-field").hide()
+      }
+    })
+  });
+
+</script>

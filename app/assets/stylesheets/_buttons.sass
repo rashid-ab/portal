@@ -1,0 +1,22 @@
+.btn,
+.submit-button
+  font-size: 16px
+  padding: 0.4em 1em
+  background: gray(80)
+  background: linear-gradient(0deg, gray(75), gray(90))
+  border: 1px solid gray(70)
+  border-radius: 4px
+  text-decoration: none
+  &:hover
+    background: gray(85)
+    background: linear-gradient(0deg, gray(80), gray(95))
+
+.btn-primary
+  color: #FFF
+  background: $button-color
+  background: linear-gradient(0deg, $button-color, lighten($button-color, 15))
+  border-color: $button-color
+  &:hover
+    background: lighten($button-color, 5)
+    background: linear-gradient(0deg, lighten($button-color, 5), lighten($button-color, 20))
+    border-color: lighten($button-color, 5)

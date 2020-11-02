@@ -1,0 +1,37 @@
+<%= semantic_form_for [:admin, resource], upload_form_options(builder: ActiveAdmin::FormBuilder) do |f| %>
+
+  <%= f.semantic_errors *f.object.errors.keys %>
+
+  <%= f.inputs do %>
+
+    <%= f.input :name %>
+    <%= f.input :phone %>
+    <%= f.input :time_zone, as: :time_zone, default: "Eastern Time (US & Canada)" %>
+    <%= f.input :primary_color, as: :color %>
+    <%= f.input :secondary_color, as: :color %>
+
+    <li>
+      <%= f.label :logo_url %>
+      <div class="multi-line-form-input">
+        <div><%= image_tag(resource.logo_url, height: '60px') if resource.logo_url %></div>
+        <div>Current file: <strong><%= resource.logo_file_name %></div></strong>
+        <%= f.file_field :logo_url, class: "file-upload-button" %>
+      </div>
+    </li>
+
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action(:submit) %>
+    <%= f.cancel_link(admin_organization_path(resource)) %>
+  <% end %>
+<% end %>
+
+
+<script>
+
+  $(function() {
+    handleFileUploadInputs('.directUpload');
+  });
+
+</script>

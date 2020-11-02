@@ -1,0 +1,16 @@
+panel t('active_admin.details', model: Report.model_name.human) do
+  attributes_table_for report do
+    row :title
+    row :service
+    row :company
+    row(:description) { simple_format report.description } 
+    row(:created_at) { report.decorate.date_and_time }
+  end
+end
+
+panel "Attachments" do
+  table_for report.attachments do |t|
+    column(:name) { |a| link_to a.name, a.url }
+    column(nil) { |a| link_to("Delete", admin_attachment_path(a), method: :delete, confirm: "Are you sure?") }
+  end
+end

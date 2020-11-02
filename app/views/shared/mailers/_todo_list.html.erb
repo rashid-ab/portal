@@ -1,0 +1,8 @@
+<p>
+  <strong><%= subject.name %></strong><br>
+  <ul>
+    <% todos.each do |todo| %>
+      <%= render 'shared/mailers/todo', todo: todo %>
+    <% end %>
+  </ul>
+</p>

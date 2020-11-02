@@ -1,0 +1,11 @@
+if Todo.for_company(resource.company).open.present?
+  para "Send this contact a summary email summary of all of their outstanding homework. (An email will automatically be sent on Monday morning.)"
+
+  para
+    form action: send_summary_email_admin_contact_path(resource), method: :post do |f|
+      input type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token
+      input type: :submit, value: "Send Summary Email"
+    end
+else
+  para "This contact doesn't have any outstanding homework."
+end

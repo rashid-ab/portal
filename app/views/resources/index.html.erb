@@ -1,0 +1,17 @@
+<div class="content narrow">
+
+  <%= render 'shared/flash' %>
+
+  <h1 class="page-title">Resources</h1>
+
+  <div class="resources-grid">
+    <% @resources.each do |resource| %>  
+            <%= link_to resource.url.present? ? resource.smart_url : resource_path(resource), target: "_blank" do %>
+                <div>
+                    <%= image_tag(resource.thumbnail_url, alt: resource.title) unless resource.thumbnail_url.blank? %>
+                    <div class="resources-title"><strong><%= resource.title %></strong></div>
+                </div>
+            <% end %>
+    <% end %>
+  </div>
+</div>

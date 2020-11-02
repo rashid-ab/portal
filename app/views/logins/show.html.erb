@@ -1,0 +1,48 @@
+<div class="content narrow">
+
+  <%= render 'shared/flash' %>
+
+  <h1 class="page-title"><%= @login.title %></h1>
+
+  <p>
+    <%= link_to "Edit Login Information", edit_login_path(@login) %>
+  </p>
+
+  <table class="attributes-table fixed-first-column">
+    <tr>
+      <td>Login Type</td>
+      <td><%= @login.login_type %></td>
+    </tr>
+    <% if @login.login_type == "SFTP or FTP" %>
+        <tr>
+            <td>Port</td>
+            <td><%= @login.port %></td>
+        </tr>
+        <tr>
+            <td>Host/Address</td>
+            <td><%= @login.host %></td>
+        </tr>
+    <% end %>
+    <tr>
+      <td>Username</td>
+      <td><%= @login.username %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= @login.email %></td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td><%= @login.password %></td>
+    </tr>
+    <tr>
+      <td>URL</td>
+      <td><%= @login.url %></td>
+    </tr>
+    <tr>
+      <td>Notes</td>
+      <td><%= @login.notes %></td>
+    </tr>
+  </table>
+
+</div>

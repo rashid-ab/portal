@@ -1,0 +1,75 @@
+.stacktable.large-only
+  display: none
+.stacktable.small-only
+  display: table
+
+.clickableRows td
+  cursor: pointer
+
+%zebra-stripe
+  td
+    background: gray(96)
+  tr:nth-child(odd)
+    td
+      background: gray(91)
+  &.clickableRows
+    tr:hover
+      td
+        background: gray(98)
+      &:nth-child(odd)
+        td
+          background: gray(93)
+
+.dashboard-table
+  @extend %zebra-stripe
+  width: 100%
+  margin-bottom: 20px
+  th
+    color: #FFF
+    font-weight: 400
+    text-transform: uppercase
+    background: $secondary-color
+    padding: 0.4em 0.8em
+    text-align: left
+  td
+    color: gray(20)
+    padding: 0.4em
+
+.attributes-table 
+  @extend %zebra-stripe
+  border-collapse: collapse
+  td
+    padding: 0.4em 1em
+    &:first-of-type
+      padding: 0.4em 0.6em
+      font-size: 0.9em
+      color: gray(40)
+      vertical-align: top
+
+.fixed-first-column
+  td:first-of-type
+    width: 1px
+    white-space: nowrap
+
+
+.report-table
+  td
+    vertical-align: top
+
+.todo-summary-table
+  margin-bottom: 20px
+  width: 100%
+
+@media (min-width: $tablet)
+  .stacktable.large-only
+    display: table
+  .stacktable.small-only
+    display: none
+
+  .min-fixed-column
+    width: 1px
+    white-space: nowrap
+
+  .dashboard-table
+    th
+      padding: 0.8em 1em

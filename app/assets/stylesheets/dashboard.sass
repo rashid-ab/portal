@@ -1,0 +1,219 @@
+body
+  color: gray(20)
+
+h1, h2, h3, h4, h5, h6
+  font-weight: normal
+
+a
+  color: gray(20)
+
+p
+  margin-top: 0
+  line-height: 1.4em
+
+.page-title
+  padding-bottom: 6px
+  border-bottom: 1px solid $secondary-color
+
+.flash
+  padding: 10px
+  border-radius: 4px
+  margin-bottom: 10px
+  &.notice
+    $flash_notice: #457545
+    color: $flash_notice
+    border: 1px solid lighten($flash_notice, 40)
+    background: lighten($flash_notice, 60)
+  &.alert
+    $flash_alert: #754545
+    color: $flash_alert
+    border: 1px solid lighten($flash_alert, 40)
+    background: lighten($flash_alert, 60)
+
+.percent-complete-bar
+  border: 2px solid gray(25)
+  border-radius: 3px
+  height: 20px
+  display: inline-block
+  float: right
+  width: 100px
+  font-size: 12px
+  line-height: 18px
+
+.percent-complete-fill
+  background: gray(25)
+  height: 100%
+  float: left
+  margin-right: 8px
+  color: #FFF
+  text-align: center
+  line-height: 18px
+
+
+.dashboard-manager
+  margin-bottom: 20px
+
+.dashboard-manager-label
+  background: $secondary-color
+  color: #FFF
+  text-transform: uppercase
+  text-align: center
+  font-size: 14px
+  padding: 20px 10px
+
+.dashboard-manager-first-name
+  text-transform: none
+  font-size: 24px
+  margin-top: 5px
+  font-weight: 300
+
+.dashboard-manager-details
+  background: gray(93)
+  font-size: 14px
+  padding: 10px
+
+.dashboard-manager-photo-frame
+  width: 120px
+  height: 120px
+  border: 1px solid #FFF
+  border-radius: 100px
+  overflow: hidden
+  background-position: center
+  background-size: cover
+  margin: 10px auto 0
+
+.dashboard-manager-title
+  font-size: 18px
+
+.dashboard-manager-quote
+  font-style: italic
+  strong
+    font-style: none
+
+.dashboard-widget
+  background: gray(93)
+  margin: 0 auto 20px
+
+
+.dashboard-widget-title
+  color: #FFF
+  font-weight: 400
+  text-transform: uppercase
+  background: $secondary-color
+  padding: 0.4em 0.8em
+
+.dashboard-widget-text
+  padding: 0.4em 0.8em
+
+.dashboard-widget-dismiss
+  float: right
+
+
+.dashboard-widget-facebook
+  max-width: 340px
+
+.dashboard-widget-blog-links
+  padding: 20px
+  li
+    list-style: none
+    margin-bottom: 0.5em
+
+
+.todo-section-header
+  display: flex
+  align-items: center
+  margin-bottom: 10px
+  .todo-add-attachment-btn
+    display: inline-block
+    margin-left: auto
+    font-size: 14px
+    postion: relative
+    top: -0.3em
+
+.todo-section-title
+  display: inline-block
+
+
+.todo-attachments-table
+  margin-bottom: 1em
+  td
+    padding-right: 1em
+
+
+.todo-section-content
+  background: gray(96)
+  border: 1px solid gray(90)
+  border-radius: 4px
+  padding: 10px
+
+.todo-submit-btn
+  width: 100%
+
+.todo-submit-instructions
+  color: gray(40)
+  font-size: 14px
+  margin-top: 1em
+
+.comments
+  margin-bottom: 20px
+
+.comment
+  background: #FFF
+  border: 1px solid gray(90)
+  border-radius: 4px
+  padding: 20px
+  &+.comment
+    margin-top: 10px
+
+.comment-meta
+  font-size: 0.9em
+  color: gray(40)
+  margin-bottom: 10px
+
+.comment-body
+  max-width: 760px
+
+.attachment-upload-container
+  margin-bottom: 20px
+
+.comment-form
+  max-width: 760px
+
+
+.empty-placeholder-message
+  background: gray(96)
+  text-align: center
+  padding: 1em
+  color: gray(50)
+  margin-bottom: 20px
+
+@media (min-width: $tablet)
+  .dashboard-manager
+    display: flex
+
+  .dashboard-manager-label
+    flex: 0 0 280px
+
+  .dashboard-manager-details
+    flex: 1
+    border-top: 8px solid $secondary-color
+    padding: 10px 20px
+
+  .dashboard-manager-title
+    margin-top: 0
+
+  .dashboard-widgets
+    display: flex
+    flex-direction: row
+    .dashboard-widget
+      flex: 1
+      &+.dashboard-widget
+        margin-left: 20px
+
+
+@media (min-width: $desktop)
+
+  .dashboard-widgets
+    display: block
+    .dashboard-widget + .dashboard-widget
+      margin-left: 0

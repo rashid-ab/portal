@@ -1,0 +1,63 @@
+<%= semantic_form_for [:admin, resource], upload_form_options(builder: ActiveAdmin::FormBuilder) do |f| %>
+
+  <%= f.semantic_errors *f.object.errors.keys %>
+
+  <%= f.inputs do %>
+
+    <%= f.input :title %>
+    <li>
+      <%= f.label "Thumbnail" %>
+      <div class="multi-line-form-input">
+        <div><%= image_tag(resource.thumbnail_url, height: '60px') if resource.thumbnail_url %></div>
+        <div>Current file: <strong><%= resource.thumbnail_file_name %></div></strong>
+        <%= f.file_field :thumbnail_url, class: "file-upload-button" %>
+      </div>
+    </li>
+    <%= f.input :content, as: :html_editor %>
+    <%= f.input :url %>
+    <li>
+      <%= f.label :project_types %>
+      <%= f.collection_select :project_type_ids, @project_types, :id, :name, {include_blank: "All"}, {id: "project-type-select", multiple: true} %>
+    </li>
+    <li>
+      <%= f.label :service_types %>
+      <%= f.collection_select :service_type_ids, @service_types, :id, :name, {include_blank: "All"}, {id: "service-type-select", multiple: true} %>
+    </li>
+    <%= f.input :version %>
+    <%= f.input :admin_notes %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action(:submit) %>
+    <%= f.cancel_link(admin_resources_path) %>
+  <% end %>
+<% end %>
+
+
+<script>
+
+  $(function() {
+    handleFileUploadInputs('.directUpload');
+  });
+
+  
+  $(document).ready(function() {
+    
+    $("#project-type-select").change(function() {
+      console.log($("#project-type-select").val())
+      if ($("#project-type-select").val() == "") {
+        $('#project-type-select option').prop('selected', true);
+      }
+    })
+
+    $("#service-type-select").change(function() {
+      if ($("#service-type-select").val() == "") {
+        $('#service-type-select option').prop('selected', true);
+      }
+    })
+
+  });
+
+
+
+</script>

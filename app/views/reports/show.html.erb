@@ -1,0 +1,32 @@
+<div class="content">
+  <%= render 'shared/flash' %>
+
+  <h1 class="page-title"><%= @report.title %></h1>
+
+  <div class="content-row">
+
+    <div class="content-sidebar">
+      <table class="dashboard-table attributes-table report-table">
+        <tr>
+          <td class="min-fixed-column">Date</td>
+          <td><%= @report.decorate.date %></td>
+        </tr>
+        <tr>
+          <td>Attachments</td>
+          <td>
+            <% @report.attachments.each do |attachment| %>
+              <%= link_to attachment.name, attachment.url %><br>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="content-main">
+      <%= simple_format @report.description %>
+    </div>
+
+  
+  </div>
+
+</div>
